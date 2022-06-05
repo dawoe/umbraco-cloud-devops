@@ -1,0 +1,377 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Make your editors happy</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/dotcontrol.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-transition="convex">
+					<h1>Make your editors happy</h1>
+				</section>
+				<section>
+					<h2>Introduction</h2>
+					<ul>
+						<li>Dave Woestenborghs</li>
+						<li>Work at DotControl <span class="fragment" style="color: var(--r-heading-color);">We are hiring</span></li>
+						<li>Umbraco MVP (6x)</li>	
+						<li>Active community member since 2008</li>													
+					</ul>
+					<aside class="notes">
+						Data drive agency with offices in r'dam, heerlen and curacoa<br/>
+						MVP since 2016<br/>
+						First blog written in 2008
+					</aside>
+				</section>				
+				<section>
+					<h2>Back in 2015...</h2>
+					<img src="img/content-is-king.jpg" class="fragment">
+					<aside class="notes">
+						- Did a similar talk at CG (last one in Copenhagen)<br/>
+						- One of the first slides.<br/>
+						- Video and slides can be found online<br/>
+					</aside>	
+				</section>
+				<section>
+					<h2>Today is about</h2>
+					<p>Creating a better editor experience</p>					
+					<p class="fragment">Just as important website visitor experience</p>	
+					<p class="fragment">Does not require a lot of additional effort</p>	
+					<aside class="notes">
+						- Most things  will seem obvious<br/>
+						- Most things can be done without writing any code<br>						
+					</aside>						
+				</section>
+				<section>
+					<h2>Happy editors <br>=<br> happy customer</h2>
+					<aside class="notes">
+						- Know your ediors !! Full time job vs someone who writes christmas cards<br>
+						- Editor with the least technical skills should be able to use it<br>
+						- Frustated editors will not use the CMS as frequently<br/>
+						- Happy customer will come back
+					</aside>					
+				</section>			
+				<section>
+					<h2>Icons</h2>
+					<ul>
+						<li class="fragment">Helps editors distinguish different types of content</li>
+						<li class="fragment">Use different colors</li>
+						<li class="fragment">Finding the correct icon is the hardest part</li>
+						<li class="fragment">There is a <a href="https://nicbell.github.io/ucreate/icons.html" target="_blank">cheat sheet</a></li>
+					</ul>					
+				</section>
+				<section>
+					<h2>Icons</h2>
+					<img src="img/content-tree-without-icons.jpg" height="500">
+				</section>
+				<section>
+					<h2>Icons</h2>
+					<img src="img/content-tree-with-icons.jpg" height="500">
+				</section>
+				<section>
+					<h2>Descriptions</h2>
+					<ul>
+						<li class="fragment">Use document and property descriptions to make clear what the purpose is.</li>
+						<li class="fragment">For example what happens when a property is left empty.</li>						
+						<li class="fragment">From 9.2 markdown will be supported</li>						
+					</ul>
+					<aside class="notes">
+						<p>If not clear without description, add one</p>
+						<p>Acts as built-in manual</p>
+					</aside>	
+				</section>
+				<section>
+					<h2>Descriptions</h2>
+					<img src="img/doctype-description.jpg" height="500">
+				</section>
+				<section>
+					<h2>Descriptions</h2>
+					<img src="img/property-description.jpg">
+				</section>
+				<section>
+					<h2>Descriptions</h2>
+					<ul>
+						<li class="fragment">Length limitations</li>					
+						<li class="fragment">Markup limitations (until 9.2)</li>
+						<li class="fragment">You can use one of these packages as solution</li>
+						<li class="fragment"><a href="https://our.umbraco.com/packages/backoffice-extensions/editor-notes-aka-ueditornotes/">Editor notes</a> or <a href="https://our.umbraco.com/packages/backoffice-extensions/contentment/">Contentment</a></li>
+					</ul>
+				</section>
+				<section>
+					<h2>Descriptions</h2>
+					<img src="img/editor-notes.jpg">
+				</section>
+				<section>
+					<h2>
+						Tabs
+					</h2>
+					<p>Use tabs to group your properties in way that improves the editor experience.</p>					
+				</section>
+				<section>
+					<h2>Tabs</h2>
+					<ul>
+						<li class="fragment">We had them in Umbraco until 8.0.0</li>
+						<li class="fragment">Were replaced by groups</li>
+						<li class="fragment">Made possible by community package <a href="https://our.umbraco.com/packages/backoffice-extensions/matryoshka-tabs-for-umbraco-8/">Matryoshka</a></li>
+						<li class="fragment">Back in Umbraco since 8.17.0</li>
+					</ul>
+					<aside class="notes">
+						<p>No tabs means a lot of scrolling</p>
+						<p>Not clear to editors where something can be found.</p>
+					</aside>
+				</section>				
+				<section>
+					<h2>Tabs</h2>
+					<ul>
+						<li class="fragment">Group them by functionality</li>
+						<li class="fragment">Use groups to combine them in side a tab</li>
+						<li class="fragment">Order tabs so frequently edited fields come first</li>
+						<li class="fragment">Observe your editors to optimize structure.</li>
+					</ul>
+					<aside class="notes">
+						<p>Group by function => all meta data props in one tab</p>
+						<p>Group inside tab => seo and open graph</p>
+						<p>Order : your main content fields should be the first tab.</p>
+					</aside>					
+				</section>
+				<section>
+					<h2>Tabs</h2>
+					<img src="img/doctype.jpg" height="500">
+				</section>
+				<section>
+					<h2>Mandatory properties</h2>
+					<ul>
+						<li class="fragment">As a developer seems logical</li>
+						<li class="fragment">But it can prevent editors from rapidly publishing content</li>
+						<li class="fragment">Handle empty properties with a fallback</li>
+						<li class="fragment">Only make them mandatory when needed</li>
+					</ul>
+					<aside class="notes">
+						<p>Developer => no need to handle empty properties</p>
+						<p>Editor => Hypothetical case</p>
+						<p>Fallbacks => Defensive programming, seo title to name, image to a default image or backgroungd color</p>
+					</aside>
+				</section>
+				<section>
+					<h2>List views</h2>
+					<ul>
+						<li class="fragment">Ideal for large collections of content</li>
+						<li class="fragment">Enabled on doctype</li>
+						<li class="fragment">Can be used as property editor</li>
+						<li class="fragment">Can be <a href="https://24days.in/umbraco-cms/2016/custom-list-view-layouts/">customized</a></li>
+					</ul>
+					<aside class="notes">
+						<p>Ideal for blogs, news, ... support searching, bulk actions</p>
+						<p>Disables tree, use property editor for when you need tree</p>
+						<p>By default use your list/grid view. But can be configured</p>
+					</aside>
+				</section>	
+				<section>
+					<h2>List views</h2>
+					<img src="img/list-view.jpg">
+				</section>	
+				<section>
+					<h2>Property editors</h2>
+					<p>The editor experience can be improved by using the correct property editor.</p>		
+					<aside class="notes">
+						<p>For example call to action button</p>
+					</aside>								
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/buttons-wrong.jpg">					
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/buttons-correct.jpg">
+				</section>			
+				<section>
+					<h2>Property editors</h2>
+					<p>Use the power of the community.</p>				
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/description.jpg">
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/metadata.jpg">
+					<small>Example is using <a href="https://our.umbraco.com/packages/collaboration/seo-visualizer/">SEO Visualizer</a></small>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<p>Think ahead when selecting a property editor.</p>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/image-placement-toggle.jpg">
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/image-placement-lr.jpg">
+					<small>Example is using <a href="https://our.umbraco.com/packages/backoffice-extensions/contentment/">Contentment</a> datalist</small>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/image-placement-full.jpg">
+					<small>Example is using <a href="https://our.umbraco.com/packages/backoffice-extensions/contentment/">Contentment</a> datalist</small>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<p>Hide irrelevant properties</p>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/condition-pick-content.jpg">
+					<small>Example is using <a href="https://our.umbraco.com/packages/backoffice-extensions/conditional-displayers/">Conditional displayers</a> dropdown</small>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/condition-categories.jpg">
+					<small>Example is using <a href="https://our.umbraco.com/packages/backoffice-extensions/conditional-displayers/">Conditional displayers</a> dropdown</small>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/condition-page-categories.jpg">
+					<small>Example is using <a href="https://our.umbraco.com/packages/backoffice-extensions/conditional-displayers/">Conditional displayers</a> dropdown</small>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<p>A lot of property editors support customizing their appearance to create a tailored experience.</p>					
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<p>Customize the blocklist preview.</p>
+					<p>Article with examples on <a href="https://24days.in/umbraco-cms/2021/advanced-blocklist-editor/">24 days in Umbraco</a></p>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/block-editor-default.jpg">				
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/custom-preview.jpg">				
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<p>Alternatives for content pickers</p>
+					<p>Use a <a href="https://our.umbraco.com/packages/backoffice-extensions/contentment/">Contentment</a> datalist with a custom editor</p>
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/featured-products-mntp.jpg">				
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<img src="img/featured-products-contentment.gif">				
+				</section>
+				<section>
+					<h2>Property editors</h2>
+					<p>Create something custom</p>
+				</section>				
+				<section>
+					<h2>Tweaking the backoffice</h2>
+					<p>By using <a href="https://our.umbraco.com/Documentation/Reference/Notifications/EditorModel-Notifications/">EditorModel Notifications</a></p>
+					<p class="fragment">Which allow us to manipulate the model used by the backoffice before it is loaded into an editor.</p>
+				</section>
+				<section>
+					<h2>Disable preview</h2>
+					<pre>
+						<code data-trim data-noescape class="language-csharp" data-line-numbers="1|3|10|12-20">
+							public class SendingContentNotificationHandler : INotificationHandler<SendingContentNotification>
+							{																
+								public void Handle(SendingContentNotification notification)
+								{
+									if (ContentTypes.Contains(notification.Content.ContentTypeAlias))
+									{
+										return;
+									}
+							
+									notification.Content.AllowPreview = false;
+																	
+									var urls = new List<UrlInfo>();							
+									var urlCultures = notification.Content.Urls.Select(x => x.Culture).Distinct().ToList();
+							
+									foreach (var culture in urlCultures)
+									{
+										urls.Add(UrlInfo.Message("This page has no links", culture));
+									}
+							
+									notification.Content.Urls = urls.ToArray();
+								}
+							}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Disable preview</h2>
+					<img src="/img/preview-disabled.jpg">
+				</section>
+				<section>
+					<h2>Tweaking the backoffice</h2>
+					<ul>
+						<li>Hide tabs and/or properties</li>
+						<li>Set default values</li>
+						<li>Change property editor view or data</li>
+						<li>Remove actions (for example unpublish)</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Tweaking the backoffice</h2>
+					<ul>
+						<li>Media items</li>
+						<li>Members</li>
+						<li>Users</li>
+						<li>Dashboards</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Wrapping up</h2>
+					<ul>
+						<li class="fragment">Know your editors</li>
+						<li class="fragment">Customize the experience</li>
+						<li class="fragment">There is no one size fits all</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Thank you</h2>
+					<p>Stay safe and wash your hands 🧼🧼🧼</p>
+					<p><a href="https://dawoe.github.io/umbraco-make-your-editors-happy/">https://dawoe.github.io/umbraco-make-your-editors-happy/</a></p>
+				</section>
+			</div>
+		</div>
+
+		<div id="dc-logo">
+			<a href="https://dotcontrol.com/">
+				<img src="img/dotcontrol-colored.svg">
+			</a>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+			});
+		</script>
+	</body>
+</html>
