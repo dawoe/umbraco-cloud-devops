@@ -240,16 +240,25 @@
       });
 
       let doMermaidStuff = function doMermaidStuff(event) {
-        let mermaidDivs = event.currentSlide.querySelectorAll(
-          ".mermaid:not(.done)"
-        );
+		  console.log(event)
+        let mermaidDivs = event.currentSlide.querySelectorAll(".mermaid");
+
+		let oldContainerDivs = document.querySelectorAll('.mermaidContainer')
+
+		oldContainerDivs.forEach(function(container) {
+			container.parentNode.removeChild(container);
+		});
+
         let indices = Reveal.getIndices();
         let pageno = `${indices.h}-${indices.v}`;
 
         mermaidDivs.forEach(function (mermaidDiv, i) {
+		  mermaidDiv.style.display = 'none';
+		  let mermaidContainerDiv = document.createElement("div");
+		  mermaidContainerDiv.classList.add('mermaidContainer');
+		  mermaidDiv.parentNode.appendChild(mermaidContainerDiv);
           let insertSvg = function (svgCode, bindFunctions) {
-            mermaidDiv.innerHTML = svgCode;
-            mermaidDiv.classList.add("done");
+            mermaidContainerDiv.innerHTML = svgCode;           
           };
           let graphDefinition = mermaidDiv.textContent;
           mermaid.mermaidAPI.render(
@@ -261,7 +270,7 @@
         Reveal.layout();
       };
 
-      Reveal.on("ready", (event) => doMermaidStuff(event));
+      //Reveal.on("ready", (event) => doMermaidStuff(event));
       Reveal.on("slidechanged", (event) => doMermaidStuff(event));
     </script>
 
