@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>Make your editors happy</title>
+    <title>Team workflow for Umbraco Cloud and Azure Devops</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -41,52 +41,129 @@
         </section>
         <section>
           <h2>Today is about</h2>
-          <p>Team workflow with Umbraco Cloud</p>
+          <p>Setting up a team workflow for umbraco 9 on cloud</p>
           <p class="fragment">Automating deployments</p>
           <p class="fragment">Using Azure Devops</p>
           <aside class="notes"></aside>
         </section>
-
+		<section>
+			<h2>What makes up a Cloud website</h2>
+			<p class="fragment">A git repository</p>
+			<p class="fragment">Hosting infrastructure</p>
+			<aside class="notes">
+				- Git repository containing your website code
+				- Web server, blob storage, database
+			</aside>
+		</section>
         <section>
-          <h2>Umbraco Cloud Workflow</h2>
+          <h2 class="r-fit-text">Umbraco Cloud Workflow</h2>
           <div class="mermaid">
             sequenceDiagram 
-				participant Noah 
-				participant SuperStoreSite 
-					SuperStoreSite->>Noah: Pulls code
-					Noah->>Noah : Makes changes
-					Noah->>SuperStoreSite: Pushes code            	
+				participant Amy 
+				participant Cloud9Website 				            	
           </div>
           <aside class="notes"></aside>
         </section>
 		<section>
-			<h2>Umbraco Cloud Workflow</h2>
+			<h2 class="r-fit-text">Umbraco Cloud Workflow</h2>
 			<div class="mermaid">
 			  sequenceDiagram 
-				  participant Noah 
-				  participant Cheyenne
-				  participant SuperStoreSite 
-				  	  	SuperStoreSite->>Noah: Pulls code
-						SuperStoreSite->>Cheyenne: Pulls code
-						Noah->>Noah : Makes changes
-						Cheyenne->>Cheyenne : Makes changes
-						Noah->>SuperStoreSite: Pushes code
-						SuperStoreSite->>Cheyenne: Pulls code
-						Cheyenne->>SuperStoreSite: Pushes code																							 				          	
+				  participant Amy 
+				  participant Cloud9Website 
+				  	Cloud9Website->>Amy: Pulls code					          	
+			</div>
+			<aside class="notes"></aside>
+		  </section>	
+		  <section>
+			<h2 class="r-fit-text">Umbraco Cloud Workflow</h2>
+			<div class="mermaid">
+			  sequenceDiagram 
+				  participant Amy 
+				  participant Cloud9Website 
+				  	Cloud9Website->>Amy: Pulls code
+				  	Amy->>Amy: Makes changes					             	
 			</div>
 			<aside class="notes"></aside>
 		  </section>
+		  <section>
+			<h2 class="r-fit-text">Umbraco Cloud Workflow</h2>
+			<div class="mermaid">
+			  sequenceDiagram 
+				  participant Amy 
+				  participant Cloud9Website 
+				  	Cloud9Website->>Amy: Pulls code
+				  	Amy->>Amy: Makes changes
+				  	Amy->>Cloud9Website: Pushes code            	
+			</div>
+			<aside class="notes"></aside>
+		  </section>					
+		  <section>
+			  <h2>Behind the scenes</h2>
+			  <div class="mermaid">
+				  sequenceDiagram 
+				  	participant Amy				
+					participant UmbracoCloud					
+						Amy->>UmbracoCloud: Pushes code						
+			  </div>
+		  </section>
 
-        <!-- exampl mermaid 
-				<section>
-					<div class="mermaid">
-					sequenceDiagram
-						participant John
-						Note right of John: Text in note
-					</div>
-				</section>
-				-->
+		  <section>
+			<h2>Behind the scenes</h2>
+			<div class="mermaid">
+				sequenceDiagram 
+					participant Amy				
+				  participant UmbracoCloud				 
+					  Amy->>UmbracoCloud: Pushes code
+					  UmbracoCloud->>UmbracoCloud: Builds code					  
+			</div>
+		</section>
+		
+		<section>
+			<h2>Behind the scenes</h2>
+			<div class="mermaid">
+				sequenceDiagram 
+				  participant Amy				
+				  participant UmbracoCloud				 
+					  Amy->>UmbracoCloud: Pushes code
+					  UmbracoCloud->>UmbracoCloud: Builds code
+					  Note right of UmbracoCloud: dotnet restore
+					  Note right of UmbracoCloud: dotnet build
+					  Note right of UmbracoCloud: dotnet publish					 
+			</div>
+		</section>
 
+		<section>
+			<h2>Behind the scenes</h2>
+			<div class="mermaid">
+				sequenceDiagram 
+					participant Amy				
+				  participant UmbracoCloud				
+					  Amy->>UmbracoCloud: Pushes code
+					  UmbracoCloud->>UmbracoCloud: Builds code
+					  Note right of UmbracoCloud: dotnet restore
+					  Note right of UmbracoCloud: dotnet build
+					  Note right of UmbracoCloud: dotnet publish
+					  Note right of UmbracoCloud: config transforms					  
+			</div>
+		</section>
+
+		<section>
+			<h2>Behind the scenes</h2>
+			<div class="mermaid">
+				sequenceDiagram 
+					participant Amy				
+				  participant UmbracoCloud
+				  participant WWWRoot as Website
+					  Amy->>UmbracoCloud: Pushes code
+					  UmbracoCloud->>UmbracoCloud: Builds code
+					  Note right of UmbracoCloud: dotnet restore
+					  Note right of UmbracoCloud: dotnet build
+					  Note right of UmbracoCloud: dotnet publish
+					  Note right of UmbracoCloud: config transforms
+					  UmbracoCloud->>WWWRoot: Deployment
+			</div>
+		</section>
+       
         <!-- code example
 				<section>
 					<h2>Disable preview</h2>
@@ -121,7 +198,7 @@
 
         <section>
           <h2>Thank you</h2>
-          <p>Stay safe and wash your hands 🧼🧼🧼</p>
+          <p>☁ ☁ ☁ And have a heavenly day ☁ ☁ ☁</p>
           <p>
             <a href="https://dawoe.github.io/umbraco-make-your-editors-happy/"
               >https://dawoe.github.io/umbraco-make-your-editors-happy/</a
@@ -266,16 +343,18 @@
 	}
 
 	.note {
-	  stroke: #decc93;
-	  fill: #fff5ad;
+	  stroke: #ff2345 !important;
+	  fill: #fff !important;
 	}
 
-	.noteText {
-	  fill: black;
+	.noteText>tspan {
+	  fill: #ff2345 !important;
+	  color:  #ff2345 !important;;
 	  stroke: none;
 	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
 	  font-size: 14px;
 	}
+	
   </style>
   </body>
 </html>
