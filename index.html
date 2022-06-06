@@ -1,51 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>Make your editors happy</title>
+    <title>Make your editors happy</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/dotcontrol.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/dotcontrol.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-transition="convex">
-					<h1>Team workflow for Umbraco Cloud</h1>
-					<h2>and Azure Devops</h2>
-				</section>
-				<section>
-					<h2>Introduction</h2>
-					<ul>
-						<li>Dave Woestenborghs</li>
-						<li>Work at <a href="https://dotcontrol.com/">DotControl</a></li>
-						<li>Umbraco MVP (7x)</li>	
-						<li>Active community member since 2008</li>													
-					</ul>
-					<aside class="notes">
-						Data drive agency with offices in r'dam, heerlen and curacoa<br/>
-						MVP since 2016<br/>
-						First blog written in 2008
-					</aside>
-				</section>				
-				<section>
-					<h2>Today is about</h2>
-					<p>Creating a better editor experience</p>					
-					<p class="fragment">Just as important website visitor experience</p>	
-					<p class="fragment">Does not require a lot of additional effort</p>	
-					<aside class="notes">
-						- Most things  will seem obvious<br/>
-						- Most things can be done without writing any code<br>						
-					</aside>						
-				</section>
-				
-				<!-- exampl mermaid 
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-transition="convex">
+          <h1>Team workflow for Umbraco Cloud</h1>
+          <h2>and Azure Devops</h2>
+        </section>
+        <section>
+          <h2>Introduction</h2>
+          <ul>
+            <li>Dave Woestenborghs</li>
+            <li>Work at <a href="https://dotcontrol.com/">DotControl</a></li>
+            <li>Umbraco MVP (7x)</li>
+            <li>Active community member since 2008</li>
+          </ul>
+          <aside class="notes">
+            Data drive agency with offices in r'dam, heerlen and curacoa<br />
+            MVP since 2016<br />
+            First blog written in 2008
+          </aside>
+        </section>
+        <section>
+          <h2>Today is about</h2>
+          <p>Team workflow with Umbraco Cloud</p>
+          <p class="fragment">Automating deployments</p>
+          <p class="fragment">Using Azure Devops</p>
+          <aside class="notes"></aside>
+        </section>
+
+        <section>
+          <h2>Umbraco Cloud Workflow</h2>
+          <div class="mermaid">
+            sequenceDiagram 
+				participant Noah 
+				participant SuperStoreSite 
+					SuperStoreSite->>Noah: Pulls code
+					Noah->>Noah : Makes changes
+					Noah->>SuperStoreSite: Pushes code            	
+          </div>
+          <aside class="notes"></aside>
+        </section>
+		<section>
+			<h2>Umbraco Cloud Workflow</h2>
+			<div class="mermaid">
+			  sequenceDiagram 
+				  participant Noah 
+				  participant Cheyenne
+				  participant SuperStoreSite 
+				  	  	SuperStoreSite->>Noah: Pulls code
+						SuperStoreSite->>Cheyenne: Pulls code
+						Noah->>Noah : Makes changes
+						Cheyenne->>Cheyenne : Makes changes
+						Noah->>SuperStoreSite: Pushes code
+						SuperStoreSite->>Cheyenne: Pulls code
+						Cheyenne->>SuperStoreSite: Pushes code																							 				          	
+			</div>
+			<aside class="notes"></aside>
+		  </section>
+
+        <!-- exampl mermaid 
 				<section>
 					<div class="mermaid">
 					sequenceDiagram
@@ -54,8 +86,8 @@
 					</div>
 				</section>
 				-->
-				
-				<!-- code example
+
+        <!-- code example
 				<section>
 					<h2>Disable preview</h2>
 					<pre>
@@ -86,63 +118,164 @@
 					</pre>
 				</section>
 				-->
-				
-				<section>
-					<h2>Thank you</h2>
-					<p>Stay safe and wash your hands 🧼🧼🧼</p>
-					<p><a href="https://dawoe.github.io/umbraco-make-your-editors-happy/">https://dawoe.github.io/umbraco-make-your-editors-happy/</a></p>
-				</section>
-			</div>
-		</div>
 
-		<div id="dc-logo">
-			<a href="https://dotcontrol.com/">
-				<img src="img/dotcontrol-colored.svg">
-			</a>
-		</div>
+        <section>
+          <h2>Thank you</h2>
+          <p>Stay safe and wash your hands 🧼🧼🧼</p>
+          <p>
+            <a href="https://dawoe.github.io/umbraco-make-your-editors-happy/"
+              >https://dawoe.github.io/umbraco-make-your-editors-happy/</a
+            >
+          </p>
+        </section>
+      </div>
+    </div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script src="plugin/zoom/zoom.js"></script>
-		<script src="dist/mermaid.min.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <div id="dc-logo">
+      <a href="https://dotcontrol.com/">
+        <img src="img/dotcontrol-colored.svg" />
+      </a>
+    </div>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
-			});
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="dist/mermaid.min.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
 
-			mermaid.mermaidAPI.initialize({
-				startOnLoad:false
-			});
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+      });
 
-			let doMermaidStuff = function doMermaidStuff(event) {
-					
-				let mermaidDivs = event.currentSlide.querySelectorAll('.mermaid:not(.done)');
-				let indices = Reveal.getIndices();
-				let pageno = `${indices.h}-${indices.v}`
-				
-				mermaidDivs.forEach(function (mermaidDiv, i) {
-				
-					let insertSvg = function(svgCode, bindFunctions){
-						mermaidDiv.innerHTML = svgCode;
-						mermaidDiv.classList.add('done');
-					};
-					let graphDefinition = mermaidDiv.textContent;
-					mermaid.mermaidAPI.render(`mermaid${pageno}-${i}`, graphDefinition, insertSvg);
-				});
-				Reveal.layout();
-			};
 
-			Reveal.on( 'ready', event => doMermaidStuff(event) );
-			Reveal.on( 'slidechanged', event => doMermaidStuff(event) );
+      mermaid.mermaidAPI.initialize({
+        startOnLoad: false,		
+		sequence: {
+			mirrorActors : false
+		}
+      });
 
-		</script>
-	</body>
+      let doMermaidStuff = function doMermaidStuff(event) {
+        let mermaidDivs = event.currentSlide.querySelectorAll(
+          ".mermaid:not(.done)"
+        );
+        let indices = Reveal.getIndices();
+        let pageno = `${indices.h}-${indices.v}`;
+
+        mermaidDivs.forEach(function (mermaidDiv, i) {
+          let insertSvg = function (svgCode, bindFunctions) {
+            mermaidDiv.innerHTML = svgCode;
+            mermaidDiv.classList.add("done");
+          };
+          let graphDefinition = mermaidDiv.textContent;
+          mermaid.mermaidAPI.render(
+            `mermaid${pageno}-${i}`,
+            graphDefinition,
+            insertSvg
+          );
+        });
+        Reveal.layout();
+      };
+
+      Reveal.on("ready", (event) => doMermaidStuff(event));
+      Reveal.on("slidechanged", (event) => doMermaidStuff(event));
+    </script>
+
+<style type="text/css">
+	.actor {
+	  stroke: #fff !important;
+	  fill: #ff2345 !important;
+	}
+	text.actor {
+	  fill: #fff !important;
+	  stroke: none !important;
+	  font-family: GalanoGrotesque, Helvetica !important;
+	  text-transform: uppercase;
+	  font-weight: 700 !important;
+	}
+
+	.actor-line {
+	  stroke: #fff !important;
+	}
+
+	.messageLine0 {
+	  stroke-width: 1.5;
+	  stroke-dasharray: "2 2";
+	  marker-end: "url(#arrowhead)";
+	  stroke: #fff !important;
+	}
+
+	.messageLine1 {
+	  stroke-width: 1.5;
+	  stroke-dasharray: "2 2";
+	  stroke: #fff !important;
+	}
+
+	#arrowhead {
+	  fill: #fff !important;
+	}
+
+	#arrowhead path{
+	  fill: #fff !important;
+	  stroke: #fff !important;
+	}
+
+	.messageText {
+	  fill: #fff !important;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	  font-size: 14px;
+	  font-weight: 700 !important;
+	}
+
+	.labelBox {
+	  stroke: #fff;
+	  fill: #ff2345 !important;;
+	}
+
+	.labelText {
+	  fill: #fff !important;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	}
+
+	.loopText {
+	  fill: #fff !important;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	}
+
+	.loopText>tspan {
+	  fill: #fff !important;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	}
+
+	.loopLine {
+	  stroke-width: 2;
+	  stroke-dasharray: "2 2";
+	  marker-end: "url(#arrowhead)";
+	  stroke: #fff !important;
+	}
+
+	.note {
+	  stroke: #decc93;
+	  fill: #fff5ad;
+	}
+
+	.noteText {
+	  fill: black;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	  font-size: 14px;
+	}
+  </style>
+  </body>
 </html>
