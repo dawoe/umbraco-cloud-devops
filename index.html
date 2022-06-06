@@ -55,8 +55,11 @@
 				- Web server, blob storage, database
 			</aside>
 		</section>
+		<section>
+			<h1>Umbraco Cloud Workflow</h2>			
+			<aside class="notes"></aside>
+		  </section>
         <section>
-          <h2 class="r-fit-text">Umbraco Cloud Workflow</h2>
           <div class="mermaid">
             sequenceDiagram 
 				participant Amy 
@@ -64,8 +67,7 @@
           </div>
           <aside class="notes"></aside>
         </section>
-		<section>
-			<h2 class="r-fit-text">Umbraco Cloud Workflow</h2>
+		<section>			
 			<div class="mermaid">
 			  sequenceDiagram 
 				  participant Amy 
@@ -74,8 +76,7 @@
 			</div>
 			<aside class="notes"></aside>
 		  </section>	
-		  <section>
-			<h2 class="r-fit-text">Umbraco Cloud Workflow</h2>
+		  <section>			
 			<div class="mermaid">
 			  sequenceDiagram 
 				  participant Amy 
@@ -85,8 +86,7 @@
 			</div>
 			<aside class="notes"></aside>
 		  </section>
-		  <section>
-			<h2 class="r-fit-text">Umbraco Cloud Workflow</h2>
+		  <section>			
 			<div class="mermaid">
 			  sequenceDiagram 
 				  participant Amy 
@@ -96,9 +96,12 @@
 				  	Amy->>Cloud9Website: Pushes code            	
 			</div>
 			<aside class="notes"></aside>
-		  </section>					
+		  </section>		
 		  <section>
-			  <h2>Behind the scenes</h2>
+			<h1>Behind the scenes</h2>			
+			<aside class="notes"></aside>
+		  </section>			
+		  <section>			 
 			  <div class="mermaid">
 				  sequenceDiagram 
 				  	participant Amy				
@@ -107,8 +110,7 @@
 			  </div>
 		  </section>
 
-		  <section>
-			<h2>Behind the scenes</h2>
+		  <section>			
 			<div class="mermaid">
 				sequenceDiagram 
 					participant Amy				
@@ -118,8 +120,7 @@
 			</div>
 		</section>
 		
-		<section>
-			<h2>Behind the scenes</h2>
+		<section>			
 			<div class="mermaid">
 				sequenceDiagram 
 				  participant Amy				
@@ -132,8 +133,7 @@
 			</div>
 		</section>
 
-		<section>
-			<h2>Behind the scenes</h2>
+		<section>			
 			<div class="mermaid">
 				sequenceDiagram 
 					participant Amy				
@@ -148,7 +148,7 @@
 		</section>
 
 		<section>
-			<h2>Behind the scenes</h2>
+			
 			<div class="mermaid">
 				sequenceDiagram 
 					participant Amy				
@@ -162,6 +162,16 @@
 					  Note right of UmbracoCloud: config transforms
 					  UmbracoCloud->>WWWRoot: Deployment
 			</div>
+		</section>
+
+		<section>
+			<h2>What is missing ?</h2>
+			<ul>
+				<li class="fragment">Build process for front end code</li>
+				<li class="fragment">Unit tests execution</li>
+				<li class="fragment">Pull request reviews</li>
+				<li class="fragment">Nuget restore from internal nuget server</li>
+			</ul>
 		</section>
        
         <!-- code example
@@ -235,8 +245,9 @@
       mermaid.mermaidAPI.initialize({
         startOnLoad: false,		
 		sequence: {
-			mirrorActors : false
-		}
+			mirrorActors : false,
+			useMaxWidth : false,						
+		}		
       });
 
       let doMermaidStuff = function doMermaidStuff(event) {
@@ -275,6 +286,17 @@
     </script>
 
 <style type="text/css">
+	.mermaidContainer {
+		width: 100%;
+		max-width: 100%;
+		display: block;
+	}
+
+	svg[id^="m"][width][height][viewBox] {
+		width: 80%;
+		height: auto;
+	}
+
 	.actor {
 	  stroke: #fff !important;
 	  fill: #ff2345 !important;
