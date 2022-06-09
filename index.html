@@ -104,41 +104,28 @@
 		  <section>			 
 			  <div class="mermaid">
 				  sequenceDiagram 
-				  	participant Amy				
+				  	participant Glenn				
 					participant UmbracoCloud					
-						Amy->>UmbracoCloud: Pushes code						
+					Glenn->>UmbracoCloud: Pushes code						
 			  </div>
 		  </section>
 
 		  <section>			
 			<div class="mermaid">
 				sequenceDiagram 
-					participant Amy				
+					participant Glenn				
 				  participant UmbracoCloud				 
-					  Amy->>UmbracoCloud: Pushes code
+				  Glenn->>UmbracoCloud: Pushes code
 					  UmbracoCloud->>UmbracoCloud: Builds code					  
 			</div>
 		</section>
-		
+			
 		<section>			
 			<div class="mermaid">
 				sequenceDiagram 
-				  participant Amy				
-				  participant UmbracoCloud				 
-					  Amy->>UmbracoCloud: Pushes code
-					  UmbracoCloud->>UmbracoCloud: Builds code
-					  Note right of UmbracoCloud: dotnet restore
-					  Note right of UmbracoCloud: dotnet build
-					  Note right of UmbracoCloud: dotnet publish					 
-			</div>
-		</section>
-
-		<section>			
-			<div class="mermaid">
-				sequenceDiagram 
-					participant Amy				
+					participant Glenn				
 				  participant UmbracoCloud				
-					  Amy->>UmbracoCloud: Pushes code
+				  	  Glenn->>UmbracoCloud: Pushes code
 					  UmbracoCloud->>UmbracoCloud: Builds code
 					  Note right of UmbracoCloud: dotnet restore
 					  Note right of UmbracoCloud: dotnet build
@@ -151,10 +138,10 @@
 			
 			<div class="mermaid">
 				sequenceDiagram 
-					participant Amy				
+					participant Glenn				
 				  participant UmbracoCloud
 				  participant WWWRoot as Website
-					  Amy->>UmbracoCloud: Pushes code
+				  Glenn->>UmbracoCloud: Pushes code
 					  UmbracoCloud->>UmbracoCloud: Builds code
 					  Note right of UmbracoCloud: dotnet restore
 					  Note right of UmbracoCloud: dotnet build
@@ -165,13 +152,25 @@
 		</section>
 
 		<section>
-			<h2>What is missing ?</h2>
-			<ul>
-				<li class="fragment">Build process for front end code</li>
-				<li class="fragment">Unit tests execution</li>
-				<li class="fragment">Pull request reviews</li>
-				<li class="fragment">Nuget restore from internal nuget server</li>
-			</ul>
+			<h2>Who is this suited for ?</h2>
+			<p class="fragment">Single developers or small teams.</li>
+			<p class="fragment">With great discipline.</p>
+		</section>
+
+		<section>
+			<h2>Human involvement</h2>
+			<p class="fragment">If anything can go wrong, it will.</p>
+			<aside class="notes">
+				Because we have humans involved we need to factor in Murphy's law.
+			</aside>
+		</section>
+
+		<section>
+			<h2>What could go wrong</h2>
+			<p class="fragment">Pushing code that does not compile</p>
+			<p class="fragment">Frontend code not updated or in development mode</p>
+			<p class="fragment">Pushing code that breaks unit tests</p>
+			<p class="fragment">Referenced a nuget package from internal server</p>
 		</section>
        
         <!-- code example
