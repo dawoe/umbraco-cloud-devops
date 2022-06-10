@@ -51,97 +51,119 @@
 			<p class="fragment">A git repository</p>
 			<p class="fragment">Hosting infrastructure</p>
 			<aside class="notes">
-				- Git repository containing your website code
-				- Web server, blob storage, database
+				- Git repository containing your website code <br>
+				- For V7/8 projects this would contain your compiled assemblies / frontend code. No build process <br>
+				- For V9 you can now push your C# code and this will be build on each deploy (even between environments) <br>
+				- Web server, blob storage, database <br>
 			</aside>
 		</section>
 		<section>
 			<h1>Umbraco Cloud Workflow</h2>			
-			<aside class="notes"></aside>
+			<aside class="notes">So let's have a look on how the default cloud workflow happens</aside>
 		  </section>
         <section>
           <div class="mermaid">
             sequenceDiagram 
 				participant Amy 
-				participant Cloud9Website 				            	
+				participant Cloud9Store 				            	
           </div>
-          <aside class="notes"></aside>
+          <aside class="notes">
+			  We have amy, our lead developer, working on the Cloud 9 Store website
+		  </aside>
         </section>
 		<section>			
 			<div class="mermaid">
 			  sequenceDiagram 
 				  participant Amy 
-				  participant Cloud9Website 
-				  	Cloud9Website->>Amy: Pulls code					          	
+				  participant Cloud9Store 
+				  	Cloud9Store->>Amy: Pulls code					          	
 			</div>
-			<aside class="notes"></aside>
+			<aside class="notes">
+				To be able to make changes Amy first need to pull the source code from Umbraco cloud.
+			</aside>
 		  </section>	
 		  <section>			
 			<div class="mermaid">
 			  sequenceDiagram 
 				  participant Amy 
-				  participant Cloud9Website 
-				  	Cloud9Website->>Amy: Pulls code
+				  participant Cloud9Store 
+				  	Cloud9Store->>Amy: Pulls code
 				  	Amy->>Amy: Makes changes					             	
 			</div>
-			<aside class="notes"></aside>
+			<aside class="notes">
+				Once cloned and up and running Amy will make her changes on her local development environment
+			</aside>
 		  </section>
 		  <section>			
 			<div class="mermaid">
 			  sequenceDiagram 
 				  participant Amy 
-				  participant Cloud9Website 
-				  	Cloud9Website->>Amy: Pulls code
+				  participant Cloud9Store 
+				  	Cloud9Store->>Amy: Pulls code
 				  	Amy->>Amy: Makes changes
-				  	Amy->>Cloud9Website: Pushes code            	
+				  	Amy->>Cloud9Store: Pushes code            	
 			</div>
-			<aside class="notes"></aside>
+			<aside class="notes">
+				After Amy is happy with her work, she will push the code back to Umbraco cloud.
+			</aside>
 		  </section>		
 		  <section>
 			<h1>Behind the scenes</h2>			
-			<aside class="notes"></aside>
+			<aside class="notes">
+				So let's have a look behind the scenes what happens when amy pushes the code.
+			</aside>
 		  </section>			
-		  <section>			 
-			  <div class="mermaid">
-				  sequenceDiagram 
-				  	participant Glenn				
-					participant UmbracoCloud					
-					Glenn->>UmbracoCloud: Pushes code						
-			  </div>
-		  </section>
-
+		  
 		  <section>			
 			<div class="mermaid">
 				sequenceDiagram 
-					participant Glenn				
-				  participant UmbracoCloud				 
-				  Glenn->>UmbracoCloud: Pushes code
-					  UmbracoCloud->>UmbracoCloud: Builds code					  
+					participant Amy			
+					participant Cloud9Store		
+					participant UmbracoCloud								 
+					Amy->>Cloud9Store: Pushes code
+					Cloud9Store->>UmbracoCloud : Triggers build
+					UmbracoCloud->>UmbracoCloud: Builds code					  
 			</div>
+			<aside class="notes">
+				After Amy pushed her code this will trigger a build process on cloud.
+			</aside>
 		</section>
 			
 		<section>			
 			<div class="mermaid">
 				sequenceDiagram 
-					participant Glenn				
-				  participant UmbracoCloud				
-				  	  Glenn->>UmbracoCloud: Pushes code
+					participant Amy		
+					participant Cloud9Store			
+				  	participant UmbracoCloud				
+				  	  Amy->>UmbracoCloud: Pushes code
+					  Cloud9Store->>UmbracoCloud : Triggers build
 					  UmbracoCloud->>UmbracoCloud: Builds code
 					  Note right of UmbracoCloud: dotnet restore
 					  Note right of UmbracoCloud: dotnet build
 					  Note right of UmbracoCloud: dotnet publish
 					  Note right of UmbracoCloud: config transforms					  
 			</div>
+			<aside class="notes">
+				The build process consists of the following steps :
+				Restore nuget packages <br>
+				Build the solution <br>
+				Publish the website <br>
+				Apply config transforms <br>
+
+				Note that this will not build any front end code.
+			</aside>
 		</section>
 
 		<section>
 			
 			<div class="mermaid">
 				sequenceDiagram 
-					participant Glenn				
+				  participant Amy			
+				  participant Cloud9Store			
 				  participant UmbracoCloud
 				  participant WWWRoot as Website
-				  Glenn->>UmbracoCloud: Pushes code
+				  Amy->>UmbracoCloud: Pushes code
+				  Cloud9Store->>UmbracoCloud : Triggers build
 					  UmbracoCloud->>UmbracoCloud: Builds code
 					  Note right of UmbracoCloud: dotnet restore
 					  Note right of UmbracoCloud: dotnet build
@@ -149,6 +171,9 @@
 					  Note right of UmbracoCloud: config transforms
 					  UmbracoCloud->>WWWRoot: Deployment
 			</div>
+			<aside class="notes">
+				After the build process completed succesfully it will deploy the new version to the wwwroot folder.
+			</aside>
 		</section>
 
 		<section>
@@ -169,8 +194,40 @@
 			<h2>What could go wrong</h2>
 			<p class="fragment">Pushing code that does not compile</p>
 			<p class="fragment">Frontend code not updated or in development mode</p>
-			<p class="fragment">Pushing code that breaks unit tests</p>
 			<p class="fragment">Referenced a nuget package from internal server</p>
+			<p class="fragment">Pushing code that breaks unit tests</p>			
+
+			<aside class="notes">
+				- Last minute change and not built locally, but pushed anyway can cause this. <br>
+				- Forgot to run the front end build process or ran in development mode. <br>
+				- Umbraco cloud can't reach that server, so can't restore it. Or maybe there is authentication needed. <br>
+				- We have unit tests in place. Last minute change done without running unit tests and not seeing all the places that are broken. <br>
+			</aside>
+		</section>
+
+		<section>
+			<h2>So what is missing</h2>
+			<p class="fragment">A pull request review process</p>
+			<p class="fragment">Running unit tests during build process.</p>
+			<p class="fragment">Automatic deployment to cloud</p>
+			<aside class="notes">				
+				- The git repository provided by Umbraco Cloud does not facilitate PR reviews. At DC we have process that requires 2 approvals. In addition we test the build <br>
+				- We at DC write a lot of unit tests and we want them to run during build processes. Stopping a release when they fail. <br>
+				- After a succesful merge of PR you want to release to cloud automaticly
+			</aside>
+		</section>
+
+		<section>
+			<h1>Azure DevOps to the rescue</h1>
+		</section>
+
+		<section>
+			<h2>Change in workflow</h2>
+			<p class="fragment">Git repository on DevOps will be primary</p>			
+		</section>
+
+		<section>
+			<h1>Setting up source control</h1>
 		</section>
        
         <!-- code example
