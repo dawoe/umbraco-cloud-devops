@@ -223,12 +223,186 @@
 
 		<section>
 			<h2>Change in workflow</h2>
-			<p class="fragment">Git repository on DevOps will be primary</p>			
+			<p class="fragment">Git repository on DevOps will be primary</p>
+			<aside class="notes">
+				- All the developers will work on this repo instead of Umbraco cloud <br>
+				- This brings us benefits like PR process, build processes, feature branches <br>
+				- The team can keep working if there issues with the Umbraco Cloud platform<br>
+			</aside>			
+		</section>
+	
+		<section>
+			<h2>Renaming the project</h2>
+			<p class="fragment">The default name for is UmbracoProject.csproj</p>
+			<p class="fragment">Located in src/UmbracoProject</p>						
+			<aside class="notes">
+				<p>When you create a project on cloud it makes Visual studio project for you. This is by default called UmbracoProject</p>
+				<p>This is located in a UmbracoProject folder in the src folder</p>				
+			</aside>
+		</section>
+		
+		<section>
+			<h2>Renaming the project</h2>
+			<p >But these can be <a href="https://our.umbraco.com/documentation/Umbraco-Cloud/Set-Up/Working-With-Visual-Studio/#renaming-the-project-file-and-folder">renamed</a></p>
+			<pre class="fragment">
+				<code data-trim data-noescape class="large">
+					[project]
+					base = "src/Cloud9Store.Web"
+					csproj = "Cloud9Store.Web.csproj"
+				</code>
+			</pre>
+			<aside class="notes">
+				<p>These can be renamed. But you will need to update .umbraco file in the root to let Cloud know about these changes.</p>
+				<p>After you changed that, you need to push these changes to cloud. Probably the last time.</p>
+			</aside>
 		</section>
 
 		<section>
-			<h1>Setting up source control</h1>
+			<h1>Configuring up Azure Devops</h1>
+			<aside class="notes">
+				The steps shown now will require you to have a project and repository already in place.
+			</aside>
 		</section>
+
+		<section>
+			<h2>Source control</h2>
+			<p class="fragment">Copy the project folder from the cloud repo</p>
+			<aside class="notes">
+				<p>We place it in a backend folder in our own repo.</p>
+				<p>We have other folders in the root as well like frontend, pipelines, docs..</p>
+			</aside>
+		</section>
+
+		<section>
+			<h2>Pull request process</h2>
+			<p class="fragment">All code changes will be added through a PR</p>
+			<p class="fragment">Will need X approvals</p>
+			<p class="fragment">Code builds.</p>
+			<p class="fragment">Unit tests ✅</p>
+			<aside class="notes">
+				<p>No direct pushes to the main branch</p>
+				<p>Will need x number of people to approve the PR before it can be merged</p>
+				<p>Code builds and unit tests succeed, otherwise merging will be blocked</p>
+				<p>You can have other requirements like work items linked, etc.</p>
+			</aside>
+		</section>
+
+		<section>
+			<h2>Pull request process</h2>
+			<img src="img/branches-new-nav.png">
+			<aside class="notes">				
+			</aside>
+		</section>
+
+		<section>
+			<h2>Pull request process</h2>
+			<img src="img/new-branches-page.png">
+			<aside class="notes">				
+			</aside>
+		</section>
+
+		<section>
+			<h2>Pull request process</h2>
+			<img src="img/require-minimum-reviewers-2020.png">
+			<aside class="notes">				
+			</aside>
+		</section>
+		
+		<section>
+			<h2>Pull request process</h2>
+			<img src="img/build-validation-2020.png">
+			<aside class="notes">				
+			</aside>
+		</section>
+
+		<section>
+			<h2>Pull request process</h2>
+			<img src="img/add-build-policy-menu-2020.png">
+			<aside class="notes">				
+			</aside>
+		</section>
+
+		<section>
+			<h2>Pull request process</h2>
+			<p class="fragment">Build pipeline configuration with yaml files in repo</p>			
+			<aside class="notes">
+				<p>As we saw we need a build pipeline for the build validation</p>
+				<p>Having them in the repo requires them to go through the PR process</p>
+			</aside>
+		</section>
+
+		<section>
+			<h2>Pull request process</h2>
+			<pre>
+				<code data-trim data-noescape class="yml" data-line-numbers="1-3|6-10|12-17|19-26">
+					parameters:
+						- name: "buildConfiguration"
+						  type: string
+
+					steps:
+						- task: DotNetCoreCLI@2
+							displayName: .NET - Restore
+							inputs:
+								command: restore
+								projects: "backend/src/**/*.csproj"						    
+
+						- task: DotNetCoreCLI@2
+							displayName: .NET - Build
+							inputs:
+								projects: "backend/src/**/*.csproj"
+								arguments: "--configuration $(buildConfiguration) --no-restore"
+								workingDirectory: backend/src      
+
+						- task: DotNetCoreCLI@2
+							displayName: .NET - Test
+							inputs:
+								command: test
+								projects: "backend/src/**/[Tt]ests/*.csproj"
+								arguments: "--configuration $(buildConfiguration) --no-restore"
+								workingDirectory: backend/src
+								nobuild: true      
+				</code>
+			</pre>			
+			<aside class="notes">
+				<p>We create a template with all the steps need in each build pipeline</p>	
+				<p>This is the bare minimum, but you can do other things like cache nuget packages, create code coverage reports..</p>			
+			</aside>
+		</section>		
+
+		<section>
+			<h2>Pull request process</h2>
+			<pre>
+				<code data-trim data-noescape class="yml" data-line-numbers="1|3-4|12-21">
+					trigger: none
+
+					pool:
+					vmImage: 'ubuntu-latest'
+
+					variables:
+						- name: buildConfiguration
+							value: 'Release'
+
+					name: $(Build.DefinitionName)-$(Rev:r)
+
+					stages:
+					- stage: backend_validation
+						displayName: 'Backend PR validation'
+						jobs:
+						- job: validate_backend
+							displayName: 'Validate backend build'
+							steps:
+							- template: ../templates/backend-build-steps.yml
+								parameters:              
+									buildConfiguration: '$(buildConfiguration)'     
+				</code>
+			</pre>			
+			<aside class="notes">
+				<p>After that we create yaml file for the actual build pipeline</p>	
+				<p>This will run on ubuntu-latest (faster builds), but be aware of case sensitive file paths</p>
+				<p>It will call our template from the previous steps</p>			
+			</aside>
+		</section>
+		
        
         <!-- code example
 				<section>

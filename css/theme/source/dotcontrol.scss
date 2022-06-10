@@ -101,6 +101,16 @@ pre code {
   line-height: 1.1rem;
 }
 
+pre code.large {
+  font-size:2rem;
+  line-height: 2.2rem;
+}
+
 .reveal .hljs.has-highlights tr:not(.highlight-line) {
   opacity: 0.2;
+}
+
+.reveal .hljs.has-highlights tr.highlight-line {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
