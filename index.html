@@ -403,6 +403,7 @@
 				<p>It will call our template from the previous steps</p>			
 			</aside>
 		</section>
+
 		
 		<section>
 			<h2>Build & release</h2>
@@ -428,7 +429,7 @@
 		</section>
 
 		<section>
-			<h2>Pull request process</h2>
+			<h2>Build process</h2>
 			<pre>
 				<code data-trim data-noescape class="yml" data-line-numbers="1-8|10-16|27-33|35-37|39-45|47-53|55-61|69-73">
 trigger:
@@ -519,44 +520,45 @@ stages:
 			</aside>
 		</section>
 
-        <!-- code example
-				<section>
-					<h2>Disable preview</h2>
-					<pre>
-						<code data-trim data-noescape class="language-csharp" data-line-numbers="1|3|10|12-20">
-							public class SendingContentNotificationHandler : INotificationHandler<SendingContentNotification>
-							{																
-								public void Handle(SendingContentNotification notification)
-								{
-									if (ContentTypes.Contains(notification.Content.ContentTypeAlias))
-									{
-										return;
-									}
-							
-									notification.Content.AllowPreview = false;
-																	
-									var urls = new List<UrlInfo>();							
-									var urlCultures = notification.Content.Urls.Select(x => x.Culture).Distinct().ToList();
-							
-									foreach (var culture in urlCultures)
-									{
-										urls.Add(UrlInfo.Message("This page has no links", culture));
-									}
-							
-									notification.Content.Urls = urls.ToArray();
-								}
-							}
-						</code>
-					</pre>
-				</section>
-				-->
+		<section>
+			<h2>Release process</h2>
+			<img src="img/release-overview.jpg">
+			<aside class="notes">
+				<p>We will create a releas pipeline that will be create a new release when our build pipeline produces a new web artifact</p>
+				<p>Once a release is created it will auto start a deployment process to cloud (can be manual) </p>
+				<p>The release pipeline has several variables declared like cloud credentials, git url, et... which well use in the build</p>
+			</aside>
+		</section>
 
-        <section>
-          <h2>Thank you</h2>
-          <p>☁ ☁ ☁ And have a heavenly day ☁ ☁ ☁</p>
+		<section>
+			<h2>Release process</h2>
+			<img src="img/release-steps.jpg" style="width:75%">
+			<aside class="notes">
+				<p>We will extract our artifact</p>
+				<p>Clone the Umbraco cloud versions </p>
+				<p>Check if Umbraco versions match (auto upgrade)</p>
+				<p>Delete view files</p>
+				<p>Copy website source to cloud folder</p>
+				<p>Copy nuget packages to cloud folder</p>
+				<p>Apply transforms (on json files, some secrets are set as variables in the release pipeline).</p>
+				<p>Push to cloud</p>
+			</aside>
+		</section>
+
+		<section>
+			<h2>Release process</h2>
+			<img src="img/release-git-log.jpg">
+			<aside class="notes">
+				<p>This will produce a nice git log.</p>			
+			</aside>
+		</section>
+
+       <section>
+          <h2 style="display:flex; flex-direction:column"><span style="color:white;">☁ ☁ ☁</span>  <span>Have a heavenly day</span>  <span style="color:white;"> ☁ ☁ ☁</span></h2>
+         
           <p>
-            <a href="https://dawoe.github.io/umbraco-make-your-editors-happy/"
-              >https://dawoe.github.io/umbraco-make-your-editors-happy/</a
+            <a href="https://dawoe.github.io/umbraco-cloud-devops/"
+              >https://dawoe.github.io/umbraco-cloud-devops/</a
             >
           </p>
         </section>
@@ -584,6 +586,8 @@ stages:
 
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+
+		totalTime:1800
       });
 
 
@@ -592,7 +596,8 @@ stages:
 		sequence: {
 			mirrorActors : false,
 			useMaxWidth : false,						
-		}		
+		},
+		
       });
 
       let doMermaidStuff = function doMermaidStuff(event) {
